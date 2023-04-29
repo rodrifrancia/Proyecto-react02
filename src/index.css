@@ -133,6 +133,7 @@ header h1 {
     border-radius: 1rem;
     text-align: center;
     background-color: var(--gris-claro);
+    
 }
 
 .alerta {
@@ -182,7 +183,7 @@ header h1 {
         width: 50%;
     }
     .dos-columnas :first-child {
-        margin-bottom: 0;
+        margin-bottom: 0px;
     }
 }
 .formulario input[type="text"].nuevo-presupuesto, 
@@ -338,7 +339,7 @@ main {
 
 .modal {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.95);
     top: 0;
     left: 0;
     right: 0;
