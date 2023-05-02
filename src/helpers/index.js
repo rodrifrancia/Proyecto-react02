@@ -6,14 +6,28 @@ export const generarId = () => {
     return random + fecha
 }
 
-export const formatearFecha = (fecha) => {
+// export const formatearFecha = (fecha) => {
 
-    const fechaNueva = new Date(fecha)
-    const opciones = {
-        year: "numeric",
-        month: "long",
-        day: "2-digit"
+//     const fechaNueva = new Date(fecha)
+//     const opciones = {
+//         year: "numeric",
+//         month: "long",
+//         day: "2-digit"
+//     }
+//     return fechaNueva.toLocaleDateString("es-ES", opciones)
+// }
+
+export const convertirFecha = (fecha) => {
+    var d = new Date(fecha);
+    var mm = d.getMonth() + 1;
+    if (mm < 10) {
+        mm = '0' + mm
     }
-
-    return fechaNueva.toLocaleDateString("es-ES", opciones)
+    var dd = d.getDate();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    var yy = d.getFullYear();
+    var myDateString = dd + '-' + mm + '-' + yy; //(US)
+    return (myDateString)
 }
