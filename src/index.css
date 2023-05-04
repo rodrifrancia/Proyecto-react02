@@ -5,6 +5,7 @@
     --gris: #94a3b8;
     --gris-oscuro: #64748b;
     --negro: #000;
+    --verde:#04CA07
 }
 
 body {
@@ -33,7 +34,7 @@ h1 {
 h2 {
     font-size: 3rem;
     text-align: center;
-    margin-bottom: 0;
+    margin-bottom: 1em;
 }
 
 .sombra {
@@ -161,7 +162,7 @@ header h1 {
 .contenedor-presupuesto {
     margin-top: -5rem;
 
-    display: block;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 
@@ -391,7 +392,7 @@ body .modal {
 
 /*** SWIPE LIST OVERRIDES **/
 .swipe-action__leading {
-    background-color: var(--azul);
+    background-color: var(--verde);
     color: var(--blanco);
     margin-bottom: 2rem;
 }

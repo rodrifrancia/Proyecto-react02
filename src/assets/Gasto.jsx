@@ -17,7 +17,7 @@ import iconoOcio from "../img/icono_ocio.svg"
 import iconoSalud from "../img/icono_salud.svg"
 import iconoSuscrip from "../img/icono_suscripciones.svg"
 
-const Gasto = ({ gasto }) => {
+const Gasto = ({ gasto, setGastoEditar, eliminarGasto }) => {
 
     const iconosCategoria = {
         ahorro: iconoAhorro,
@@ -31,34 +31,44 @@ const Gasto = ({ gasto }) => {
 
     const { nombre, cantidad, categoria, id, fecha } = gasto
 
-    const leadingActions=()=>{
-        console.log("editando")
-    }
-    const trailingActions=()=>{
-        console.log("borrar")
-    }
+    const leadingActions = () => (
+        <LeadingActions>
+            <SwipeAction onClick={() => setGastoEditar(gasto)}>
+                Editar
+            </SwipeAction>
+        </LeadingActions>
+    )
+    const trailingActions = () => (
+        <TrailingActions>
+            <SwipeAction
+                onClick={() => eliminarGasto(id)}
+                destructive={true}
+                >
+            </SwipeAction>
+        </TrailingActions>
+    )
     return (
         <SwipeableList>
             <SwipeableListItem
-            leadingActions={leadingActions}
-            trailingActions={trailingActions}
-            >         
-        <div className='gasto sombra'>
-            <div className='contenido-gasto'>
-                <img src={iconosCategoria[categoria]} alt="Icono gasto" />
-                <div className='descripcion-gasto'>
-                    <p className='categoria'>{categoria}</p>
-                    <p className='nombre-gasto'>{nombre}</p>
-                    <p className='fecha-gasto'>
-                        Agregado el : {""}
-                        <span>{convertirFecha(fecha)}</span>
+                leadingActions={leadingActions()}
+                trailingActions={trailingActions()}
+            >
+                <div className='gasto sombra'>
+                    <div className='contenido-gasto'>
+                        <img src={iconosCategoria[categoria]} alt="Icono gasto" />
+                        <div className='descripcion-gasto'>
+                            <p className='categoria'>{categoria}</p>
+                            <p className='nombre-gasto'>{nombre}</p>
+                            <p className='fecha-gasto'>
+                                Agregado el : {""}
+                                <span>{convertirFecha(fecha)}</span>
 
-                    </p>
+                            </p>
+                        </div>
+                    </div>
+                    <p className='cantidad-gasto'>{cantidad}</p>
                 </div>
-            </div>
-            <p className='cantidad-gasto'>{cantidad}</p>
-        </div>
-        </SwipeableListItem>
+            </SwipeableListItem>
         </SwipeableList>
     )
 }
