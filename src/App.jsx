@@ -18,6 +18,22 @@ function App() {
     localStorage.getItem("gastos") ? JSON.parse(localStorage.getItem("gastos")) :[]
   )
   const [gastoEditar, setGastoEditar] = useState({})
+  const [filtro,setFiltro] = useState("")
+  const [gastosFiltro,setGastosFiltro] = useState([])
+  //dinero disponible
+  const [disponible, setDisponible] = useState(0)
+  //agregar presupuesto
+  const [agregarPresupuesto, setAgregarPresupuesto] = useState(false)
+  const [agregado, setAgregado] = useState(0)
+  
+
+  const sumarAgregado=()=>{
+    const actual=presupuesto+agregado
+    setPresupuesto(actual)
+  //  console.log(presupuesto+agregado)
+  //  console.log(typeof(presupuesto))
+  //  console.log(typeof(agregado))
+  }
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
@@ -28,6 +44,7 @@ function App() {
     }
   }, [gastoEditar])
 
+  //este useeffect se ejecuta cada vez que presupuesto cambia
   useEffect(() => {
     localStorage.setItem("presupuesto", presupuesto ?? 0)
   }, [presupuesto])
@@ -36,6 +53,16 @@ function App() {
     localStorage.setItem("gastos" , JSON.stringify(gastos)??0)
   },[gastos])
 
+  
+  //este useeffect se ejecuta cada vez que filtro cambia
+  useEffect(()=>{
+    if(filtro){
+    const gastosFiltrados = gastos.filter( gasto => gasto.categoria===filtro)
+    setGastosFiltro(gastosFiltrados)
+  }
+  },[filtro])
+
+  //este useeffect se ejecuta una vez cuando llenamos el primer input con un presupuesto
   useEffect(() => {
     const presupuestoLS = Number(localStorage.getItem("presupuesto") ?? 0)
     if (presupuestoLS > 0) {
@@ -82,23 +109,35 @@ function App() {
 
   return (
     <div className={modal ? 'fijar' : ""}>
-
       <Header
         gastos={gastos}
+        setGastos={setGastos}
         presupuesto={presupuesto}
         setPresupuesto={setPresupuesto}
         isValidPresu={isValidPresu}
         setIsValidPresu={setIsValidPresu}
+        disponible={disponible}
+        setDisponible={setDisponible}
+        agregarPresupuesto={agregarPresupuesto}
+        setAgregarPresupuesto={setAgregarPresupuesto}
+        agregado={agregado}
+        setAgregado={setAgregado}
+        sumarAgregado={sumarAgregado}
       />
 
       {isValidPresu && (
         <>
           <main>
-            <Filtros/>
+            <Filtros
+            filtro={filtro}
+            setFiltro={setFiltro}
+            />
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
+              filtro={filtro}
+              gastosFiltro={gastosFiltro}
             />
           </main>
           <div className='nuevo-gasto'>
@@ -114,6 +153,7 @@ function App() {
         guardarGasto={guardarGasto}
         gastoEditar={gastoEditar}
         setGastoEditar={setGastoEditar}
+        disponible={disponible}
       />}
     </div>
   )

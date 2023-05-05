@@ -1,25 +1,39 @@
 import { useState, useEffect } from 'react'
-import { CircularProgressbar, buildStyles} from 'react-circular-progressbar'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import "react-circular-progressbar/dist/styles.css"
+import AgregarPresu from './AgregarPresu'
 
-const ControlPresupuesto = ({ presupuesto, gastos }) => {
+const ControlPresupuesto = ({
+    presupuesto,
+    setPresupuesto,
+    gastos,
+    setGastos,
+    disponible,
+    setDisponible,
+    setIsValidPresu,
+    agregarPresupuesto,
+    setAgregarPresupuesto,
+    agreado,
+    setAgregado,
+    sumarAgregado
+    }) => {
 
-    const [disponible, setDisponible] = useState(0)
+
     const [gastado, setGastado] = useState(0)
     const [porcentaje, setPorcentaje] = useState(0)
 
     useEffect(() => {
-        const totalGastado= gastos.reduce((total,gasto) => gasto.cantidad + total,0)
-        const totalDisponible = presupuesto-totalGastado
+        const totalGastado = gastos.reduce((total, gasto) => gasto.cantidad + total, 0)
+        const totalDisponible = presupuesto - totalGastado
         setDisponible(totalDisponible)
         //Para ver el porcentaje que me queda
         //setPorcentaje(totalDisponible/presupuesto*100)
 
         //Para ver el porcentaje gastado
-        const nuevoPorcentaje = (((presupuesto-totalDisponible)/presupuesto*100)).toFixed(2)
-        setTimeout(()=>{
-        setPorcentaje(nuevoPorcentaje)
-        },700)
+        const nuevoPorcentaje = (((presupuesto - totalDisponible) / presupuesto * 100)).toFixed(2)
+        setTimeout(() => {
+            setPorcentaje(nuevoPorcentaje)
+        }, 700)
         setGastado(totalGastado)
     }, [gastos])
 
@@ -29,20 +43,41 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
             currency: "USD"
         })
     }
+
+    const handleResetApp =()=>{
+        const resultado = confirm("Desea borrar todos los gastos?")
+        if(resultado)
+        {setPresupuesto(0)
+        setGastos([])
+        setIsValidPresu(false)
+        }
+    }
+
+    
     return (
+        <>
         <div className='contenedor-presupuesto contenedor sombra dos-columnas'>
             <div>
-            <CircularProgressbar
-            styles={buildStyles({
-                pathColor:"#3B82F6",
-                trailColor:"#EBEBEB",
-                textColor:"#3B82F6"
-            })}
-            value={porcentaje}
-            text={`${porcentaje}% Gastado`}
-            />
+                <CircularProgressbar
+                    styles={buildStyles({
+                        pathColor: "#3B82F6",
+                        trailColor: "#EBEBEB",
+                        textColor: "#3B82F6"
+                    })}
+                    value={porcentaje}
+                    text={`${porcentaje}% Gastado`}
+                />
             </div>
             <div className='contenido-presupuesto'>
+
+                <button className='reset-app'
+                onClick={handleResetApp}
+                >Resetear app</button>
+                
+                <button className='agregar-presu'
+                onClick={()=>setAgregarPresupuesto(true)}>
+                    Agregar Presupuesto
+                </button>
                 <p>
                     <span>Presupuesto: </span> {formatearCantidad(presupuesto)}
                 </p>
@@ -53,7 +88,17 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
                     <span>Gastado: </span> {formatearCantidad(gastado)}
                 </p>
             </div>
+            
         </div>
+        {agregarPresupuesto && <AgregarPresu
+        setAgregarPresupuesto={setAgregarPresupuesto}
+        agreado={agreado}
+        setAgregado={setAgregado}
+        presupuesto={presupuesto}
+        setPresupuesto={setPresupuesto}
+        sumarAgregado={sumarAgregado}
+        />}
+        </>
     )
 }
 
