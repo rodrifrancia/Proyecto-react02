@@ -1,17 +1,16 @@
 import React from 'react'
 import btModal from "../img/cerrar.svg"
 
-const AgregarPresu = ({setAgregarPresupuesto,agregado,setAgregado,presupuesto,setPresupuesto,sumarAgregado}) => {
+const AgregarPresu = ({setAgregarPresupuesto,agregado,setAgregado,sumarAgregado}) => {
     
     const handleSubmit=(e)=>{
         e.preventDefault()
         sumarAgregado()
         setAgregarPresupuesto(false)
-        //setPresupuesto(presupuesto+agregado)
     }
 
     return (
-        <div className='modal2 modal'>
+        <div className='modal modal2'>
             <div className='cerrar-modal'>
                 <img src={btModal}
                     alt="cerrar modal"

@@ -393,7 +393,7 @@ main {
     right: 0;
     bottom: 0;
 }
-.modal .cerrar-modal {
+.modal .cerrar-modal{
     position: absolute;
     right: 3rem;
     top: 3rem;
@@ -405,7 +405,7 @@ main {
     width: 100%;
 }
 
-.modal .formulario {
+.modal .formulario{
     max-width: 80rem;
     width: 40rem;
     transition-property: all;
@@ -416,8 +416,12 @@ main {
 .modal label {
     color: var(--blanco)
 }
-body .modal .modal2{
+body .modal, .modal2 {
     overflow: hidden;
+}
+.modal2{
+    position: fixed;
+    z-index: 9999;
 }
 
 .modal .formulario.animar {
@@ -434,7 +438,7 @@ body .modal .modal2{
 }
 .contenedor-modal2{
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

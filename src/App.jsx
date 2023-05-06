@@ -30,9 +30,7 @@ function App() {
   const sumarAgregado=()=>{
     const actual=presupuesto+agregado
     setPresupuesto(actual)
-  //  console.log(presupuesto+agregado)
-  //  console.log(typeof(presupuesto))
-  //  console.log(typeof(agregado))
+    setDisponible(disponible+agregado)
   }
 
   useEffect(() => {
