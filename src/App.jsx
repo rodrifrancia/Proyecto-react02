@@ -25,12 +25,17 @@ function App() {
   //agregar presupuesto
   const [agregarPresupuesto, setAgregarPresupuesto] = useState(false)
   const [agregado, setAgregado] = useState(0)
+  //agregar presupuesto en el modal del formulario
+  const [mensajeState, setMensajeState] = useState(false)
   
 
   const sumarAgregado=()=>{
     const actual=presupuesto+agregado
     setPresupuesto(actual)
     setDisponible(disponible+agregado)
+    setTimeout(()=>{
+    setAgregado(0)
+    },500)
   }
 
   useEffect(() => {
@@ -121,6 +126,8 @@ function App() {
         agregado={agregado}
         setAgregado={setAgregado}
         sumarAgregado={sumarAgregado}
+        mensajeState={mensajeState}
+        setMensajeState={setMensajeState}
       />
 
       {isValidPresu && (
@@ -152,6 +159,9 @@ function App() {
         gastoEditar={gastoEditar}
         setGastoEditar={setGastoEditar}
         disponible={disponible}
+        setAgregarPresupuesto={setAgregarPresupuesto}
+        mensajeState={mensajeState}
+        setMensajeState={setMensajeState}
       />}
     </div>
   )

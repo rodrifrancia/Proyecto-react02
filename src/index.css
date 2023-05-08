@@ -5,7 +5,8 @@
     --gris: #94a3b8;
     --gris-oscuro: #64748b;
     --negro: #000;
-    --verde:#33B478
+    --verde:#33B478;
+    --rosa:#db2777;
 }
 
 body {
@@ -131,6 +132,15 @@ header h1 {
     background-color: #042a67;
     cursor: pointer;
 }
+.form-modal2 p{
+    font-size: medium;
+    text-align: center;
+    color: var(--gris-oscuro);
+}
+
+.form-modal2 p span{
+    color: #000;
+} 
 
 .form-modal2 input{
     background-color: var(--gris-claro);
@@ -170,6 +180,11 @@ header h1 {
 }
 .divAlerta{
     display: flex;  
+}
+.error-oscuro{
+    background-color: #000000f1;
+    border-left: 5px solid #b91c1c;
+    color: #b91c1c;
 }
 .alerta2{
     padding: 2rem 5rem;
@@ -248,7 +263,7 @@ header h1 {
 }
 .reset-app {
     border: none;
-    background-color: #db2777;
+    background-color: var(--rosa);
     padding: 1rem;
     margin-bottom: 1rem;
     width: 100%;
@@ -458,7 +473,7 @@ body .modal, .modal2 {
 }
 
 .swipe-action__trailing {
-    background-color: #db2777;
+    background-color: var(--rosa);
     margin-bottom: 2rem;
     color: var(--blanco);
 }
@@ -469,4 +484,38 @@ body .modal, .modal2 {
     align-items: center;
     font-size: 2.4rem;
     text-align: right;
+}
+.mensaje2{
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.mensaje2 p{
+    font-size: medium;
+    text-align: center;
+    color: var(--blanco);
+    text-transform: uppercase;
+}
+.mensaje2 .buttonSi{
+    background-color: var(--verde);
+    color: var(--blanco);
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 2.4rem 1rem 2.4rem;
+    margin-right: 2rem;
+}
+.mensaje2 .buttonSi:hover{
+    background-color: #2e9e6a;
+    cursor: pointer;
+}
+.mensaje2 .buttonNo{
+    background-color: var(--rosa);
+    color: var(--blanco);
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 2rem 1rem 2rem;
+    margin-left: 2rem;
+}
+.mensaje2 .buttonNo:hover{
+    background-color: #c71465;
+    cursor: pointer;
 }

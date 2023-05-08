@@ -2,9 +2,21 @@ import React from 'react'
 import btModal from "../img/cerrar.svg"
 import Mensaje from './Mensaje'
 import { useState, useEffect } from 'react'
-import MensajeDisponibilidad from './MensajeDisponibilidad'
+import AgregarPresu from './AgregarPresu'
+import MensajePresu from './MensajePresu'
 
-const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEditar, setGastoEditar, disponible }) => {
+const Modal = ({
+    setModal,
+    animarModal,
+    setAnimarModal,
+    guardarGasto,
+    gastoEditar,
+    setGastoEditar,
+    disponible,
+    setAgregarPresupuesto,
+    mensajeState,
+    setMensajeState
+}) => {
 
     const [nombre, setNombre] = useState("")
     const [cantidad, setCantidad] = useState("")
@@ -34,14 +46,14 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
             return;
         }
         if (cantidad > disponible) {
-            setMensaje("No puedes gastar mas dinero del disponible")
-        }else if(cantidad ==0){
+            setMensaje2("No puedes gastar mas dinero del disponible...")
+            setMensajeState(true)
+        } else if (cantidad == 0) {
             setMensaje("Ingresa un monto mayor a 0")
-        }else {
+        } else {
             guardarGasto({ nombre, cantidad, categoria, id, fecha })
         }
     }
-
 
 
     const ocultarModal = (e) => {
@@ -50,7 +62,6 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
         setGastoEditar({})
         setTimeout(() => {
             setModal(false)
-
         }, 500)
     }
     return (
@@ -66,6 +77,16 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
                 <legend>{gastoEditar.nombre ? "Editar Gasto" : "Nuevo Gasto"}</legend>
 
                 {mensaje && <Mensaje tipo="error">{mensaje} </Mensaje>}
+                {mensajeState&& mensaje2?
+                    <div>
+                        <Mensaje tipo="error">{mensaje2}</Mensaje>
+                        <MensajePresu
+                            mensajeState={mensajeState}
+                            setMensajeState={setMensajeState}
+                            setAgregarPresupuesto={setAgregarPresupuesto}
+                        />
+                    </div>:null}
+
 
                 <div className='campo'>
                     <label htmlFor="nombre">Nombre Gasto</label>
@@ -97,9 +118,6 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, gastoEdita
                     </select>
                 </div>
                 <input type="submit" value={gastoEditar.nombre ? "Guardar Cambios" : "Añadir Gasto"} />
-                {mensaje2 && <MensajeDisponibilidad tipo="alerta2">
-                    {mensaje}
-                </MensajeDisponibilidad>}
             </form>
         </div>
     )

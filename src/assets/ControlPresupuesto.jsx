@@ -13,9 +13,11 @@ const ControlPresupuesto = ({
     setIsValidPresu,
     agregarPresupuesto,
     setAgregarPresupuesto,
-    agreado,
+    agregado,
     setAgregado,
-    sumarAgregado
+    sumarAgregado,
+    mensajeState,
+    setMensajeState
     }) => {
 
 
@@ -35,7 +37,7 @@ const ControlPresupuesto = ({
             setPorcentaje(nuevoPorcentaje)
         }, 700)
         setGastado(totalGastado)
-    }, [gastos])
+    }, [gastos,presupuesto])
 
     const formatearCantidad = (cant) => {
         return cant.toLocaleString("en-US", {
@@ -92,11 +94,14 @@ const ControlPresupuesto = ({
         </div>
         {agregarPresupuesto && <AgregarPresu
         setAgregarPresupuesto={setAgregarPresupuesto}
-        agreado={agreado}
+        agregado={agregado}
         setAgregado={setAgregado}
         presupuesto={presupuesto}
+        disponible={disponible}
         setPresupuesto={setPresupuesto}
         sumarAgregado={sumarAgregado}
+        mensajeState={mensajeState}
+        setMensajeState={setMensajeState}
         />}
         </>
     )

@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import btModal from "../img/cerrar.svg"
+import Mensaje from './Mensaje'
 
-const AgregarPresu = ({setAgregarPresupuesto,agregado,setAgregado,sumarAgregado}) => {
+
+const AgregarPresu = ({
+    setAgregarPresupuesto,
+    agregado,
+    setAgregado,
+    sumarAgregado,
+    mensajeState,
+    setMensajeState,
+    presupuesto,
+    disponible
+    }) => {
+
+    const [mensaje3, setMensaje3] = useState("")
     
     const handleSubmit=(e)=>{
         e.preventDefault()
+        if(agregado<=0){
+            setMensaje3("Ingrese un valor mayor a 0")
+        }else{
         sumarAgregado()
         setAgregarPresupuesto(false)
+        if(mensajeState){
+            setMensajeState(false)
+        }
+    }
     }
 
     return (
@@ -20,6 +40,9 @@ const AgregarPresu = ({setAgregarPresupuesto,agregado,setAgregado,sumarAgregado}
             <div className='contenedor-modal2'>
                 <div className='form-modal2'>
                     <h2>¿Cuanto presupuesto desea agregar?</h2>
+                    <p><span>Presupuesto actual: </span>{presupuesto}</p>
+                    <p><span>Disponible: </span>{disponible}</p>
+                    {mensaje3 && <Mensaje tipo="error-oscuro">{mensaje3}</Mensaje>}
                     <form action="">
                         <input type="number"
                         placeholder='Escriba el monto'

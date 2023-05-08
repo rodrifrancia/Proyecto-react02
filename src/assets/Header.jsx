@@ -16,7 +16,9 @@ const Header = ({
     setAgregarPresupuesto,
     agregado,
     setAgregado,
-    sumarAgregado
+    sumarAgregado,
+    mensajeState,
+    setMensajeState
     }) => {
     
 
@@ -38,6 +40,8 @@ const Header = ({
             agregado={agregado}
             setAgregado={setAgregado}
             sumarAgregado={sumarAgregado}
+            mensajeState={mensajeState}
+            setMensajeState={setMensajeState}
             >
 
             </ControlPresupuesto>
